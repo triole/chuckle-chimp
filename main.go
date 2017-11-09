@@ -33,14 +33,18 @@ func (t JokesToList) toString() string {
 func getJokes() []JokesToList {
 	jokes := make([]JokesToList, 1000000)
 
+	// two ways of accessing the json data
 	// simple json file reading
 	// raw, err := ioutil.ReadFile(jokesJSONFile)
 
 	// using assets of go-bindata
 	raw, err := Asset("data/jokes.json")
+
+	// error handler, but you know that
 	if err != nil {
 		panic(err)
 	}
+
 	json.Unmarshal(raw, &jokes)
 	return jokes
 }
