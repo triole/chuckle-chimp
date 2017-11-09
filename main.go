@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 )
 
@@ -33,7 +32,12 @@ func (t JokesToList) toString() string {
 
 func getJokes() []JokesToList {
 	jokes := make([]JokesToList, 1000000)
-	raw, err := ioutil.ReadFile(jokesJSONFile)
+
+	// simple json file reading
+	// raw, err := ioutil.ReadFile(jokesJSONFile)
+
+	// using assets of go-bindata
+	raw, err := Asset("data/jokes.json")
 	if err != nil {
 		panic(err)
 	}
