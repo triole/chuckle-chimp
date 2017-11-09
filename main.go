@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 var (
 	jokesList     []string
@@ -10,9 +8,14 @@ var (
 )
 
 func main() {
-	jokes := getJokes()
-	for _, te := range jokes {
-		jokesList = append(jokesList, te)
-		fmt.Println(te)
-	}
+	jokes := GetAllJokes()
+	r := RandomNumberBetween(0, len(jokes))
+	joke := jokes[r]
+	fmt.Println(joke)
+	// i := random(0, 90)
+	// fmt.Println(i)
+	// for _, file := range j {
+	// fmt.Println(file)
+	// }
+	// fmt.Println(jokes[i])
 }

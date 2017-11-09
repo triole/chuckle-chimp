@@ -1,6 +1,8 @@
 package main
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // Jokes a list of chuck norris jokes
 // type JokesToDic struct {
@@ -8,33 +10,19 @@ import "encoding/json"
 // 	Joke string `json:"joke"`
 // }
 
-// JokesToList create a simple array containing all the jokes from the json
-type JokesToList struct {
+// Joke struct to get key from json
+type Joke struct {
 	Joke string `json:"joke"`
 }
 
-func (t JokesToList) toString() string {
-	bytes, err := json.Marshal(t)
-	if err != nil {
-		panic(err)
-	}
-	return string(bytes)
-}
-
-func getJokes() []JokesToList {
-	jokes := make([]JokesToList, 1000000)
-
-	// two ways of accessing the json data
-	// simple json file reading
-	// raw, err := ioutil.ReadFile(jokesJSONFile)
-	// using assets of go-bindata
-	raw, err := Asset("data/jokes.json")
-
-	// error handler, but you know that
-	if err != nil {
-		panic(err)
-	}
-
-	json.Unmarshal(raw, &jokes)
-	return jokes
+// GetAllJokes reads the jokes dictionary and returns a list of all jokes
+func GetAllJokes() []Joke {
+	var allJokes []Joke
+	var tmpJokes []Joke
+	input, err := Asset("data/jokes.json")
+	checkErr(err)
+	err = json.Unmarshal(input, &tmpJokes)
+	checkErr(err)
+	allJokes = append(allJokes, tmpJokes...)
+	return allJokes
 }
