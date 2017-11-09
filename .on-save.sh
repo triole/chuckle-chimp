@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name="chuckjoke"
+builddir="./aedificatio/"
 
 # architectures to build
 archs=(
@@ -9,16 +9,11 @@ archs=(
 )
 
 # vars
-builddir="./aedificatio/"
 mkdir -p ${builddir}
-
-# basic datections
-# scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
-# maingo=($(find ${scriptdir} -maxdepth 1 -type f -regex ".*\.go$"))
-# name=$(echo ${maingo} | grep -Po "([^/]+$)" | grep -Po ".*?(?=\.)")
+name=$(echo ${scriptdir} | grep -Po "/([^/]+)/?$" | tr -d "/")
 
 go-bindata data/
-go fmt ${maingo}
+go fmt *.go
 
 for a in "${archs[@]}"; do
    tf="${builddir}${name}_${a}"
@@ -28,11 +23,3 @@ for a in "${archs[@]}"; do
       break
    fi
 done
-
-# AUTO ARCH DETECTION
-# arch=$(dpkg --print-architecture)
-# if [[ $? == "0" ]]; then
-#    go build -ldflags="-s -w" -o ${builddir}${name}_${arch} ${gofile}
-# else
-#    notify-send "Go build failed."
-# fi
