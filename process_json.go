@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // Jokes a list of chuck norris jokes
@@ -25,4 +26,9 @@ func GetAllJokes() []Joke {
 	checkErr(err)
 	allJokes = append(allJokes, tmpJokes...)
 	return allJokes
+}
+
+// StringifyJoke converts struct Joke to type String
+func StringifyJoke(n Joke) string {
+	return fmt.Sprintf("%s", n)
 }

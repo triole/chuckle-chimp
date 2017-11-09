@@ -1,17 +1,18 @@
 package main
 
-import "fmt"
-
-var (
-	jokesList     []string
-	jokesJSONFile = "/home/ole/rolling/golang/projects/chuckjoke/jokes.json"
+import (
+	"fmt"
 )
 
 func main() {
 	jokes := GetAllJokes()
 	r := RandomNumberBetween(0, len(jokes))
-	joke := jokes[r]
-	fmt.Println(joke)
+	joke := StringifyJoke(jokes[r])
+	joke = CleanUpString(joke)
+	fmt.Println("\n")
+	fmt.Printf(joke)
+	fmt.Println("\n")
+
 	// i := random(0, 90)
 	// fmt.Println(i)
 	// for _, file := range j {

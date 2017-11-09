@@ -1,7 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
 	"math/rand"
+	"regexp"
+	"strings"
 	"time"
 )
 
@@ -10,6 +14,21 @@ func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// CleanUpString removes unnecessary characters from string
+func CleanUpString(s string) string {
+	r, _ := regexp.Compile("[^{}]+")
+	arr := r.FindAllString(s, -1)
+	rs := strings.Join(arr[:], ",")
+	return rs
+}
+
+// PrintFile prints file content to stdout
+func PrintFile(fn string) {
+	data, err := ioutil.ReadFile(fn)
+	checkErr(err)
+	fmt.Println(string(data))
 }
 
 // RandomNumberBetween returns a random number in a range between two values
