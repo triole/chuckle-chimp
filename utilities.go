@@ -37,10 +37,24 @@ func RandomNumberBetween(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
-func shuffleList(a []Joke) []Joke {
-	for i := range a {
-		j := RandomNumberBetween(0, 10)
-		a[i], a[j] = a[j], a[i]
+// WordWrap wraps a string making it fit a line length, respects word boundaries
+func WordWrap(text string, lineWidth int) string {
+	words := strings.Fields(strings.TrimSpace(text))
+	if len(words) == 0 {
+		return text
 	}
-	return a
+	wrapped := words[0]
+	spaceLeft := lineWidth - len(wrapped)
+	for _, word := range words[1:] {
+		if len(word)+1 > spaceLeft {
+			wrapped += "\n" + word
+			spaceLeft = lineWidth - len(word)
+		} else {
+			wrapped += " " + word
+			spaceLeft -= 1 + len(word)
+		}
+	}
+
+	return wrapped
+
 }
