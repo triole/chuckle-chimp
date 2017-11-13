@@ -10,7 +10,6 @@ func main() {
 	joke := StringifyJoke(jokes[r])
 	joke = CleanUpString(joke)
 
-	// final output
 	wrapped := WordWrap(joke, 30)
 	fmt.Println("\n")
 	fmt.Printf(wrapped)

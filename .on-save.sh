@@ -10,6 +10,7 @@ archs=(
 
 # vars
 mkdir -p ${builddir}
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 name=$(echo ${scriptdir} | grep -Po "/([^/]+)/?$" | tr -d "/")
 
 go-bindata data/
