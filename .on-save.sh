@@ -1,19 +1,16 @@
 #!/bin/bash
 
+# settings and architectures to build
 builddir="./aedificatio/"
+archs=("amd64" "arm")
 
-# architectures to build
-archs=(
-   "amd64"
-   "arm"
-)
-
-# vars
-mkdir -p ${builddir}
-scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# self setting vars
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/"
 name=$(echo ${scriptdir} | grep -Po "/([^/]+)/?$" | tr -d "/")
 
-go-bindata data/
+mkdir -p ${builddir}
+
+# go-bindata data/
 go fmt *.go
 
 for a in "${archs[@]}"; do
