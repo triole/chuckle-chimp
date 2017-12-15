@@ -10,7 +10,7 @@ name=$(echo ${scriptdir} | grep -Po "/([^/]+)/?$" | tr -d "/")
 
 mkdir -p ${builddir}
 
-# go-bindata data/
+go-bindata data/
 go fmt *.go
 
 for a in "${archs[@]}"; do
