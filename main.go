@@ -11,8 +11,9 @@ func main() {
 	joke = CleanUpString(joke)
 
 	wrapped := WordWrap(joke, 30)
-	fmt.Println("\n")
+	fmt.Println("")
+	fmt.Println("")
 	fmt.Printf(wrapped)
-	fmt.Println("\n")
-
+	fmt.Println("")
+	fmt.Println("")
 }
