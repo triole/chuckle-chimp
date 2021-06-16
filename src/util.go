@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -9,36 +10,31 @@ import (
 	"time"
 )
 
-// --- utility functions
 func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
 }
 
-// CleanUpString removes unnecessary characters from string
-func CleanUpString(s string) string {
+func cleanUpString(s string) string {
 	r, _ := regexp.Compile("[^{}]+")
 	arr := r.FindAllString(s, -1)
 	rs := strings.Join(arr[:], ",")
 	return rs
 }
 
-// PrintFile prints file content to stdout
-func PrintFile(fn string) {
+func printFile(fn string) {
 	data, err := ioutil.ReadFile(fn)
 	checkErr(err)
 	fmt.Println(string(data))
 }
 
-// RandomNumberBetween returns a random number in a range between two values
-func RandomNumberBetween(min, max int) int {
+func randomNumberBetween(min, max int) int {
 	rand.Seed(time.Now().Unix())
 	return rand.Intn(max-min) + min
 }
 
-// WordWrap wraps a string making it fit a line length, respects word boundaries
-func WordWrap(text string, lineWidth int) string {
+func wordWrap(text string, lineWidth int) string {
 	words := strings.Fields(strings.TrimSpace(text))
 	if len(words) == 0 {
 		return text
@@ -54,7 +50,5 @@ func WordWrap(text string, lineWidth int) string {
 			spaceLeft -= 1 + len(word)
 		}
 	}
-
 	return wrapped
-
 }
